@@ -1,0 +1,32 @@
+name: WordPress Deploy
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up SSH
+        uses: webfactory/ssh-agent@v0.5.3
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y rsync
+
+      - name: Deploy WordPress
+        run: |
+          rsync -r --exclude='wp-config.php' $GITHUB_WORKSPACE/ user@your-server-ip:/path/to/wordpress
+          rsync wp-config.php root@68.183.83.66:/var/www/jai.hopto.org/html/wordpress
+
+      - name: Trigger server reload
+        run: ssh root@68.183.83.66 "sudo systemctl reload nginx"  # Adjust this line based on your server setup
