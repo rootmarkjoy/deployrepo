@@ -25,3 +25,8 @@ jobs:
 
       - name: Trigger server reload
         run: ssh root@68.183.83.66 "sudo systemctl reload nginx"  # Adjust this line based on your server setup
+
+        script: |
+          cd /var/www/jai.hopto.org/html/wordpress
+          git pull origin main
+          git status
