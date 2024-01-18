@@ -23,7 +23,7 @@ jobs:
 
       - name: Deploy to Server
         run: |
-          rsync -r --exclude='.git' $GITHUB_WORKSPACE/ user@your-server-ip:/path/to/destination
+          rsync -r --exclude='.git' $GITHUB_WORKSPACE/ root@68.183.83.66:/var/www/jai.hopto.org/html/wordpress
         env:
           SSH_USER: root
           SERVER_IP: 68.183.83.66
