@@ -20,7 +20,7 @@ jobs:
 
       - name: Deploy WordPress
         run: |
-          rsync -r --exclude='wp-config.php' $GITHUB_WORKSPACE/ user@your-server-ip:/path/to/wordpress
+          rsync -r --exclude='wp-config.php' $GITHUB_WORKSPACE/ root@68.183.83.66:/var/www/jai.hopto.org/html/wordpress
           rsync wp-config.php root@68.183.83.66:/var/www/jai.hopto.org/html/wordpress
 
       - name: Trigger server reload
