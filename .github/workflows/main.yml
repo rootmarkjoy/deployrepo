@@ -25,7 +25,9 @@ jobs:
         run: sudo apt-get install -y rsync
 
       - name: Deploy to server
-  run: rsync -r --exclude='.git' --verbose --itemize-changes --progress --exclude='.git' "/home/runner/work/deployrepo/deployrepo/." root@68.183.83.66:/var/www/jai.hopto.org/html/wordpress
+  run: |
+          rsync -r --exclude='.git' "${{ github.workspace }}/." root@68.183.83.66:/var/www/jai.hopto.org/html/wordpress
+          
         env:
           SSH_USER: root
           SERVER_IP: 68.183.83.66
